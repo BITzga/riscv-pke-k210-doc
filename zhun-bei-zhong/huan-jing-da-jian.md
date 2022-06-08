@@ -106,25 +106,25 @@ step2.安装pip3
 
 step3.使用数据线连接电脑USB和K210
 
-```
 查看设备 观察是否连接成功（一般出现/dev/ttyUSB0，就是成功）
-```
-
-lumin@lumin:\~$ ls /dev/ttyUSB\* /dev/ttyUSB0
 
 ```
+lumin@lumin:~$ ls /dev/ttyUSB*
+/dev/ttyUSB0
 ```
 
 step4.我们想要与k210通信，除了驱动，还需要一个类似终端的东西来进行输入/输出，也就是串口终端工具miniterm
 
 ```
-```
-
 sudo apt install python3-serial
-
-```
-然后就可以连接设备，用miniterm与之通信了
 ```
 
 step5.进入代码文件夹，打开terminal，输入make k210，os内核就可以被编译、打包、烧录，然后运行在k210上。
 
+## qemu篇
+
+step1.安装qemu
+
+step2.验证是否安装成功 [安装硬件模拟器 - uCore OS(on RISC-V64)实验指导书 (gitbook.io)](https://nankai.gitbook.io/ucore-os-on-risc-v64/lab0/pei-zhi-huan-jing/an-zhuang-ying-jian-mo-ni-qi#shi-yong-opensbi)
+
+step3.如果上述环境均验证成功，进入代码文件夹，打开terminal，输入make qemu，os内核就可以编译打包，然后运行在qemu上了。
