@@ -1,10 +1,9 @@
 ---
-description: this is tutorial of pke-k210
 coverY: 0
 ---
 
-# Welcome!
+# 🌅 “准备中”
 
-## Welcome aboard!
+本章节是指导手册的前置部分
 
-Welcome to the company wiki! Here you'll find everything you need to know about the company.
+主要包括预备知识、环境搭建教程
