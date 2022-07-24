@@ -9,7 +9,7 @@
 * [lab2 指令异常](lab2-zhi-ling-yi-chang/README.md)
   * [实验任务书](lab2-zhi-ling-yi-chang/shi-yan-ren-wu-shu.md)
 * [lab3 定时器中断](lab3-ding-shi-qi-zhong-duan/README.md)
-  * [实验任务书](lab3-ding-shi-qi-zhong-duan/shi-yan-ren-wu-shu.md)
+  * [实验任务书](lab3-ding-shi-qi-zhong-duan/copy-of-shi-yan-ren-wu-shu.md)
 * [lab4 虚拟地址到物理地址的转换](lab4-xu-ni-di-zhi-dao-wu-li-di-zhi-de-zhuan-huan/README.md)
   * [实验任务书](lab4-xu-ni-di-zhi-dao-wu-li-di-zhi-de-zhuan-huan/shi-yan-ren-wu-shu.md)
 * [lab5 内存回收](lab5-nei-cun-hui-shou/README.md)
