@@ -9,21 +9,22 @@
 * user/app\_illegal\_instruction.c
 
 ```
-  1 /*
-  2  * Below is the given application for lab1_2.
-  3  * This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.
-  4  */
-  5
-  6 #include "user_lib.h"
-  7 #include "util/types.h"
-  8
-  9 int main(void) {
- 10   printu("Going to hack the system by running privilege instructions.\n");
- 11   // we are now in U(user)-mode, but the "csrw" instruction requires M-mode privilege.
- 12   // Attempting to execute such instruction will raise illegal instruction exception.
- 13   asm volatile("csrw sscratch, 0");
- 14   exit(0);
- 15 }
+/*
+ * Below is the given application for lab1_2.
+ * This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.
+ */
+
+#include "user_lib.h"
+#include "../util/types.h"
+
+int main(void) {
+  printu("Going to hack the system by running privilege instructions.\n");
+  // we are now in U(user)-mode, but the "csrw" instruction requires M-mode privilege.
+  // Attempting to execute such instruction will raise illegal instruction exception.
+  asm volatile("csrw sscratch, 0");
+  exit(0);
+}
+
 ```
 
 
