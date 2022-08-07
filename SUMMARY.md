@@ -1,8 +1,8 @@
 # Table of contents
 
-* [🌅 “准备中”](README.md)
-  * [预备知识](zhun-bei-zhong/yu-bei-zhi-shi.md)
-  * [环境搭建](zhun-bei-zhong/huan-jing-da-jian.md)
+* [🌅 lab0 “准备中”](README.md)
+  * [预备知识](lab0-zhun-bei-zhong/yu-bei-zhi-shi.md)
+  * [环境搭建](lab0-zhun-bei-zhong/huan-jing-da-jian.md)
 * [lab1 系统调用](lab-1-system-call.md)
   * [实验任务书](lab1-xi-tong-tiao-yong/shi-yan-ren-wu-shu.md)
   * [K210移植历程](lab1-xi-tong-tiao-yong/k210-yi-zhi-li-cheng.md)

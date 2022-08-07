@@ -16,7 +16,7 @@ RustSBI在K210兼容了高版本的指令。K210实现的RISC-V指令集是1.9.1
 
 串口实现: 引入了RustSBI，我们很容易实现串口输出。只需要调用SBI提供的服务即可。
 
-```
+```c
 uint64 SBI_CONSOLE_PUTCHAR = 1;
 uint64 sbi_call(uint64 sbi_type, uint64 arg0, uint64 arg1, uint64 arg2) {
     uint64 ret_val;
@@ -40,7 +40,7 @@ void sbi_console_putchar(unsigned char ch) {
 
 格式化输出实现：有了串口输出的方法，接下来我们需要格式化输出sprint。sprint定义在spike\_interface/spike\_utils.c 接下来我们看看sprint的代码。
 
-```
+```c
 void sprint(const char *s, ...) {
     va_list vl;
     va_start(vl, s);
@@ -51,7 +51,7 @@ void sprint(const char *s, ...) {
 
 sprint函数的第一个参数对应了一个字符串的起始地址，第二个参数...代表可变参数。接下来我们点开vprintk的实现：
 
-```
+```c
 void vprintk(const char* s, va_list vl) {
   char out[256];
   int res = vsnprintf(out, sizeof(out), s, vl);
@@ -62,7 +62,7 @@ void vprintk(const char* s, va_list vl) {
 
 通过阅读代码发现，vsnprintf并没有将字符串真正输出到控制台。而是根据原先的字符串和参数做字符串格式化，将最终结果保存在out数组中。 真正将字符串打印的函数调用是spike\_file\_write。这个函数是调用了spike的接口，通过spike去调用Linux的字符串打印API。所以我们需要在K210上实现串口输出，方案已经很明显，就是将spike\_file\_write函数替换成sbi\_console\_putchar实现的打印函数cputs。
 
-```
+```c
 void vprintk(const char *s, va_list vl) {
     char out[256];
     int res = vsnprintf(out, sizeof(out), s, vl);
@@ -89,7 +89,7 @@ int cputs(const char *str) {
 
 内核在编码调试过程中，需要借助一些方法来判断变量值是否符合预期，如assert方法，如果不符合预期需要打印错误信息，并且让内核panic。那么panic在pke上是如何实现的呢？我们可以阅读pke实现panic的代码。
 
-```
+```c
 void do_panic(const char *s, ...) {
     va_list vl;
     va_start(vl, s);
@@ -118,7 +118,7 @@ void shutdown(int code) {
 
 首先，我们现在mentry.S中加入以下两行，用以确保\_mentry是内核的程序入口点。
 
-```
+```nasm
 .globl _mentry
 .section .text.prologue, "ax"
 _mentry:
@@ -126,7 +126,7 @@ _mentry:
 
 确定了内核的程序入口点，还需要把程序入口点的地址设置为0x80020000，这需要我们对内存布局进行改造。修改BASE\_ADDRESS，赋值为0x80020000.并设置代码段的起始地址为BASE\_ADDRESS，自此，内存布局就修改完成了。
 
-```
+```nasm
 OUTPUT_ARCH(riscv)
 ENTRY(_mentry)
 BASE_ADDRESS = 0x80020000;
@@ -154,7 +154,7 @@ SECTIONS
 
 由于我们需要引入RustSBI，并需要将其打包进入内核。除此之外，还需要将内核烧录到K210，并与K210进行串口通讯。现有的Makefile并不支持这些工作。因此，我们需要修改MakeFile。
 
-```
+```makefile
 k210: $(KERNEL_K210_TARGET)
    $(PYTHON) compile_tool/kflash.py -p $(PORT) -b 1500000 $(KERNEL_K210_TARGET)
    $(TERM) --eol LF --dtr 0 --rts 0 --filter direct $(PORT) 115200
@@ -162,7 +162,7 @@ k210: $(KERNEL_K210_TARGET)
 
 整体的编译流程为： **1.打包内核**
 
-```
+```makefile
 $(KERNEL_K210_TARGET): $(KERNEL_TEMP_TARGET) $(BOOTLOADER)
    $(COPY) $(BOOTLOADER) $@
    $(V)dd if=$(KERNEL_TEMP_TARGET) of=$@ bs=128K seek=1
@@ -174,13 +174,13 @@ $(KERNEL_K210_TARGET): $(KERNEL_TEMP_TARGET) $(BOOTLOADER)
 
 用数据线将K210与上位机连接，再使用kflash，指定好相关参数即可完成烧录。
 
-```
+```makefile
 $(PYTHON) compile_tool/kflash.py -p $(PORT) -b 1500000 $(KERNEL_K210_TARGET)
 ```
 
 **3.运行**
 
-```
+```makefile
 $(TERM) --eol LF --dtr 0 --rts 0 --filter direct $(PORT) 115200
 ```
 
@@ -220,7 +220,7 @@ rust-sbi运行并跳转到指定地址->
 
 mentry.S
 
-```
+```nasm
 call s_start
 ```
 
