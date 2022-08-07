@@ -76,3 +76,35 @@ You need to implement the operations that actually handle the page fault in lab2
 在PKE操作系统内核中完善用户态栈空间的管理，使得它能够正确处理用户进程的“压栈”请求。
 
 实验完成后的运行结果：
+
+```
+    .______       __    __      _______.___________.  _______..______   __
+    |   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
+    |  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
+    |      /     |  |  |  |    \   \       |  |      \   \    |   _  < |  |
+    |  |\  \----.|  `--'  |.----)   |      |  |  .----)   |   |  |_)  ||  |
+    | _| `._____| \______/ |_______/       |__|  |_______/    |______/ |__|
+    [rustsbi] Implementation: RustSBI-K210 Version 0.0.2
+    [rustsbi] misa: RV64ACDFIMSU
+    [rustsbi] mideleg: ssoft, stimer (0x22)
+    [rustsbi] medeleg: ima, bkpt, uecall (0x109)
+    [rustsbi] enter supervisor 0x80020000
+    Enter supervisor mode...
+    PKE kernel start 0x0000000080020000, PKE kernel end: 0x0000000080028000, PKE kernel size: 0x0000000000008000 .
+    free physical memory address: [0x0000000080028000, 0x000000008011ffff]
+    kernel memory manager is initializing ...
+    KERN_BASE 0x0000000080020000
+    physical address of _etext is: 0x0000000080025000
+    kernel page table is on
+    User application is loading.
+    user frame 0x000000008011b000, user stack 0x000000007ffff000, user kstack 0x000000008011a000
+    Application program entry point (virtual address): 0x0000000080020fc2
+    Switch to user mode...
+    handle_page_fault: 000000007fffdff8
+    handle_page_fault: 000000007fffcff8
+    handle_page_fault: 000000007fffbff8
+    Summation of an arithmetic sequence from 0 to 1000 is: 500500
+    User exit with code:0.
+    System is shutting down with exit code 0.
+    [rustsbi] reset triggered! todo: shutdown all harts on k210; program halt. Type: 0, reason: 0    
+```
