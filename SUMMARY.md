@@ -12,6 +12,7 @@
   * [实验任务书](lab3-ding-shi-qi-zhong-duan/copy-of-shi-yan-ren-wu-shu.md)
 * [lab4 虚拟地址到物理地址的转换](lab4-xu-ni-di-zhi-dao-wu-li-di-zhi-de-zhuan-huan/README.md)
   * [实验任务书](lab4-xu-ni-di-zhi-dao-wu-li-di-zhi-de-zhuan-huan/shi-yan-ren-wu-shu.md)
+  * [实验指导](lab4-xu-ni-di-zhi-dao-wu-li-di-zhi-de-zhuan-huan/shi-yan-zhi-dao.md)
 * [lab5 内存回收](lab5-nei-cun-hui-shou/README.md)
   * [实验任务书](lab5-nei-cun-hui-shou/shi-yan-ren-wu-shu.md)
 * [lab6 栈空间异常与缺页异常](lab6-zhan-kong-jian-yi-chang-yu-que-ye-yi-chang/README.md)
