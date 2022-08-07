@@ -6,7 +6,7 @@
 
 * user/app\_illegal\_instruction.c
 
-```c
+```
 /*
  * Below is the given application for lab1_2.
  * This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.
@@ -24,6 +24,8 @@ int main(void) {
 }
 
 ```
+
+
 
 （在用户U模式下执行的）应用企图执行RISC-V的特权指令`csrw sscratch, 0`。该指令会修改S模式的栈指针，如果允许该指令的执行，执行的结果可能会导致系统崩溃。
 
