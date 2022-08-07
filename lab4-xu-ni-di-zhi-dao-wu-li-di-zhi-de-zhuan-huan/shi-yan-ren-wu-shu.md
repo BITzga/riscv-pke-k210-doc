@@ -4,7 +4,7 @@
 
 * user/app\_helloworld\_no\_lds.c
 
-```
+```c
 /*
  * Below is the given application for lab2_1.
  * This app runs in its own address space, in contrast with in direct mapping.
@@ -64,7 +64,7 @@ int main(void) {
 
 读者可以参考lab1\_1的内容，重走从应用的printu到S态的系统调用的完整路径，最终来到kernel/syscall.c文件的sys\_user\_print()函数：
 
-```
+```c
  21 ssize_t sys_user_print(const char* buf, size_t n) {
  22   //buf is an address in user space on user stack,
  23   //so we have to transfer it into phisical address (kernel is running in direct mapping).
@@ -78,7 +78,7 @@ int main(void) {
 \
 该函数最终在第26行通过调用sprint将结果输出，但是在输出前，需要将buf地址转换为物理地址传递给sprint，这一转换是通过user\_va\_to\_pa()函数完成的。而user\_va\_to\_pa()函数的定义在kernel/vmm.c文件中定义：
 
-```
+```c
 150 void *user_va_to_pa(pagetable_t page_dir, void *va) {
 151   // TODO (lab2_1): implement user_va_to_pa to convert a given user virtual address "va"
 152   // to its corresponding physical address, i.e., "pa". To do it, we need to walk
